@@ -1,4 +1,7 @@
-class MapAdapter:
+## Structural pattern
+# Object adapter: Exposing just the `size`
+# `insert` `lookup`, `remove` and `does_map`
+class ObjectAdapter:
 
     def __init__(self):
         self.map = dict()
@@ -19,8 +22,9 @@ class MapAdapter:
     def does_map(self, key):
         return key in self.map
 
-
-class PyMapAdapter(dict):
+# Class adapter: Exposing dict methods and the `size`
+# `insert` `lookup`, `remove` and `does_map` new ones.
+class ClassAdapter(dict):
 
     def size(self):
         return len(self)

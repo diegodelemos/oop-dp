@@ -4,7 +4,8 @@
 (01) Decorator/Wrapper                   ---- Structural
      ~ Avoids Class explosion
      ~ Runtime configuration (while
-       chaning the identity of the objects)
+       chaning the identity of the
+       objects)
 
 (02) Abstract Factory/Kit                ---- Creational
      ~ Having `types` as first class
@@ -13,17 +14,23 @@
 (03) Template Method                     ---- Behavioural
 
 (04) Factory Method/Virtual Constructor  ---- Creational
-     ~ Typicaly done in python using @classmethod
+     ~ Typicaly done in python using
+       @classmethod
 
 (05) Singleton                           ---- Creational
 
+(06) State				 ---- Behavioural
+     ~ Preserves object identity
+
+(07) Strategy				 ---- Behavioural
+     ~ Having functions as first class
+       objects
 
 
-
-               ___________________________________					  
-              | Creational       Behavioural	  |
---------------------------------------------------|
-Inheritance     Factory Method	 Template Method  |
---------------------------------------------------|
-Composition     Abstract Factory		  |
-__________________________________________________|
+               _____________________________________					  
+              | Creational        | Behavioural	    |
+ ---------------------------------------------------|
+|Inheritance  |  Factory Method	  | Template Method |
+|---------------------------------------------------|
+|Composition  |  Abstract Factory | Strategy        |
+|___________________________________________________|

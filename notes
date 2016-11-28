@@ -1,0 +1,29 @@
+(00) Adapter/Wrapper                     ---- Structural
+     ~ Adapts interfaces
+
+(01) Decorator/Wrapper                   ---- Structural
+     ~ Avoids Class explosion
+     ~ Runtime configuration (while
+       chaning the identity of the objects)
+
+(02) Abstract Factory/Kit                ---- Creational
+     ~ Having `types` as first class
+       objects
+
+(03) Template Method                     ---- Behavioural
+
+(04) Factory Method/Virtual Constructor  ---- Creational
+     ~ Typicaly done in python using @classmethod
+
+(05) Singleton                           ---- Creational
+
+
+
+
+               ___________________________________					  
+              | Creational       Behavioural	  |
+--------------------------------------------------|
+Inheritance     Factory Method	 Template Method  |
+--------------------------------------------------|
+Composition     Abstract Factory		  |
+__________________________________________________|

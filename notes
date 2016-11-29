@@ -1,44 +1,43 @@
 link: http://jacek.web.cern.ch/jacek/courses/dp/course.html
 
 (00) Adapter/Wrapper                     ---- Structural
-     ~ Adapts interfaces
+     ~ Adapts interfaces.
 
 (01) Decorator/Wrapper                   ---- Structural
-     ~ Avoids Class explosion
+     ~ Avoids Class explosion.
      ~ Runtime configuration (while
        chaning the identity of the
-       objects)
-     ~ Doesn't preserve object identity
-     ~ Changes the skin
+       objects).
+     ~ Doesn't preserve object identity.
+     ~ Changes the skin.
 
 (02) Abstract Factory/Kit                ---- Creational
      ~ **Having `types` as first class
        objects**
      ~ In Python everything is a first
-       class object so this pattern
-       is 
+       class object.
 
 (03) Template Method                     ---- Behavioural
 
 (04) Factory Method/Virtual Constructor  ---- Creational
      ~ Typicaly done in python using
-       @classmethod
+       @classmethod.
 
 (05) Singleton                           ---- Creational
      ~ Not just having global shared
-       state
+       state.
      ~ The goal is to make sure we have
        just one object instance
-       i.e. printer queue, stdout
+       i.e. printer queue, stdout.
 
 (06) State				 ---- Behavioural
-     ~ Preserves object identity
-     ~ Changes the guts
+     ~ Preserves object identity.
+     ~ Changes the guts.
 
 (07) Strategy				 ---- Behavioural
      ~ **Having functions as first class
-       objects**
-     ~ Out of the box in Python
+       objects.**
+     ~ Out of the box in Python.
 
 (08) Facade				 ---- Behavioural
      ~ Keep in mind it is different to
@@ -49,9 +48,29 @@ link: http://jacek.web.cern.ch/jacek/courses/dp/course.html
      ~ Virtual (creation). i.e. Reading
        big files.
      ~ Copy on Write. i.e. copying a big
-       object
+       object.
      ~ Caching. i.e. remember data that
        cost a lot to compute.
+
+(10) Observer				 ---- Behavioural
+     ~ Push-pull spectrum. Observer gets
+       information as parameter on update
+       call or he pulls info from where
+       he 'knows'.
+     ~ Atomicity of opeartions inside
+       `subject`. Ensure consistency of
+       internal state.
+
+(11) Command				 ---- Behavioural
+     ~ **Wants functions as first class
+       objects.**
+     ~ Hysteresis, be careful
+       i.e. s = srt(2) -> s * s == 2
+       Solution for this is Memento
+       storing states instead of actions.
+     ~ Strategy VS Command
+       How	VS What
+     ~ Treat functions as data.
 
                _____________________________________
               | Creational        | Behavioural	    |

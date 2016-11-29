@@ -40,6 +40,18 @@ link: http://jacek.web.cern.ch/jacek/courses/dp/course.html
        objects**
      ~ Out of the box in Python
 
+(08) Facade				 ---- Behavioural
+     ~ Keep in mind it is different to
+       adapter.
+
+(09) Proxy
+     ~ Remote. Faking remote object(cost)
+     ~ Virtual (creation). i.e. Reading
+       big files.
+     ~ Copy on Write. i.e. copying a big
+       object
+     ~ Caching. i.e. remember data that
+       cost a lot to compute.
 
                _____________________________________
               | Creational        | Behavioural	    |

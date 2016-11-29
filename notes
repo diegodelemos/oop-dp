@@ -1,3 +1,5 @@
+link: http://jacek.web.cern.ch/jacek/courses/dp/course.html
+
 (00) Adapter/Wrapper                     ---- Structural
      ~ Adapts interfaces
 
@@ -6,10 +8,15 @@
      ~ Runtime configuration (while
        chaning the identity of the
        objects)
+     ~ Doesn't preserve object identity
+     ~ Changes the skin
 
 (02) Abstract Factory/Kit                ---- Creational
-     ~ Having `types` as first class
-       objects
+     ~ **Having `types` as first class
+       objects**
+     ~ In Python everything is a first
+       class object so this pattern
+       is 
 
 (03) Template Method                     ---- Behavioural
 
@@ -18,16 +25,23 @@
        @classmethod
 
 (05) Singleton                           ---- Creational
+     ~ Not just having global shared
+       state
+     ~ The goal is to make sure we have
+       just one object instance
+       i.e. printer queue, stdout
 
 (06) State				 ---- Behavioural
      ~ Preserves object identity
+     ~ Changes the guts
 
 (07) Strategy				 ---- Behavioural
-     ~ Having functions as first class
-       objects
+     ~ **Having functions as first class
+       objects**
+     ~ Out of the box in Python
 
 
-               _____________________________________					  
+               _____________________________________
               | Creational        | Behavioural	    |
  ---------------------------------------------------|
 |Inheritance  |  Factory Method	  | Template Method |

@@ -1,0 +1,2465 @@
+<!--?xml version="1.0" encoding="utf-8"?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<!-- 2016-11-28 Mon 20:45 -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Object-Oriented Design Patterns</title>
+<meta name="generator" content="Org-mode">
+<meta name="author" content="Jacek">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<style>
+.buzzphrase { color : red; }
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Object-Oriented Design Patterns</h1>
+
+<div id="outline-container-org4a45bfa" class="outline-2">
+<h2 id="org4a45bfa"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-orgbe7cf87" class="outline-3">
+<h3 id="orgbe7cf87"><span class="section-number-3">1.1</span> Software Design Patterns</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Architects tend to reuse the <b>similar</b> solutions to various problems
+repeatedly</li>
+<li>Cataloguing them and giving them names, makes it easier to think
+about them, use them and communicate with your colleagues</li>
+<li>Let's apply this idea to software development</li>
+<li id="Gang of Four">Gamma, Helm, Johnson and Vlissides</li>
+<li>Pattern Languages</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0c5f9d6" class="outline-3">
+<h3 id="org0c5f9d6"><span class="section-number-3">1.2</span> Pattern Language</h3>
+<div class="outline-text-3" id="text-1-2">
+<blockquote>
+<p>
+The elements of this language are entities called patterns. Each
+pattern describes a problem which occurs over and over again in our
+environment, and then describes the core of the solutiton to that
+problem, in such a way that you can use this solution a millon times
+over, without ever doing it the same way twice.  – Christopher
+Alexander
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org7e7e5be" class="outline-3">
+<h3 id="org7e7e5be"><span class="section-number-3">1.3</span> Gang of Four</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Probably the most influential book discussing software design patterns
+is <i>Design Patterns: Elements of Reusable Object-Oriented Software</i>,
+by Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides (often
+referred to as The Gang of Four).
+</p>
+
+<p>
+A very important aspect of design patterns is their use as a <b>pattern
+language</b>. If a language is to be a useful tool for communication with
+others, many others need to speak the same language: these are the
+most widely-known patterns, so they should form the basic vocabulary
+in any software developer's pattern vocabulary.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org291a030" class="outline-3">
+<h3 id="org291a030"><span class="section-number-3">1.4</span> Design principles</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>Program to interface not implementation</li>
+<li>Prefer composition over inheritance</li>
+<li>Strive for loose coupling</li>
+<li>Encapsulate what varies</li>
+</ul>
+
+<p>
+Changing behaviour at runtime. Run-time programming.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4393a28" class="outline-3">
+<h3 id="org4393a28"><span class="section-number-3">1.5</span> Scope</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+This is a course about design patterns which are mostly relevant to
+software development in the context of message passing (single
+dispatch) object oriented programming.
+</p>
+
+<p>
+To a first-order approximation: Java and C++.
+</p>
+
+<p>
+In significantly different environments, many of these patterns become
+either unnecessary/pointless, or impossible/impractical to use.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7489680" class="outline-2">
+<h2 id="org7489680"><span class="section-number-2">2</span> Executable pseudocode</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+We will explore these patterns, neither in Java nor in C++: those
+languages (especially the latter) force you to think about the details
+of those languages, and make it difficult to see the important
+concepts hiding behind the implementation details.
+</p>
+
+<p>
+We will express the ideas in Python, because:
+</p>
+
+<ul class="org-ul">
+<li>You can all learn the necessary core of Python in about 30
+minutes.</li>
+<li>Python is good at getting out of your way and letting the
+important concepts shine through.</li>
+<li>A number of important shortcomings that some of these patterns aim
+to overcome, are absent from Python. This often makes it easier to
+see the utility of a pattern without first having to get bogged
+down in its implementation.</li>
+</ul>
+
+<p>
+Python is often described as <i>executable pseudocode</i>.
+</p>
+</div>
+
+<div id="outline-container-orga8e901e" class="outline-3">
+<h3 id="orga8e901e"><span class="section-number-3">2.1</span> Python</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Please work you way through this <a href="http://jacek.web.cern.ch/jacek/courses/dp/intro-to-python.py">whirlwind introduction to Python</a>. The
+aim is to learn how to write simple algorithms, functions and classes
+in Python.
+</p>
+
+<p>
+Python is a fully-fledged and very powerful and expressive programming
+language in its own right, but here we only use its basic features, as
+we are interested in Python as an executable pseudocode. The idea is
+to be able to express the design patterns with the minimal fuss, and
+yet have code that can be run.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2645dbf" class="outline-3">
+<h3 id="org2645dbf"><span class="section-number-3">2.2</span> First-class functions/classes</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+A first-class object is one that can be treated like any other normal
+datum: It can be
+</p>
+
+<ul class="org-ul">
+<li>Stored in a variable</li>
+<li>Stored in a container object</li>
+<li>Passed as an argument to a function</li>
+<li>Returned from a function</li>
+</ul>
+
+<p>
+Note that functions and classes are <b>not</b> first-class in Java and
+C++ (functions are almost first-class in C++, through the use of
+function pointers).
+</p>
+
+<p>
+Both functions and classes are first-class in Python. Many of the GoF
+patterns become trivial, or significantly simlper in the presence of
+first-class functions or classes.
+</p>
+
+<p>
+If you understand first-class functions and first-class classes, many
+of these patterns will become much easier to understand.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7655446" class="outline-2">
+<h2 id="org7655446"><span class="section-number-2">3</span> Exploring the Patterns</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-org3a1d2c4" class="outline-3">
+<h3 id="org3a1d2c4"><span class="section-number-3">3.1</span> Adapter</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="buzzphrase">
+<p>
+Convert the interface of a class into another interface clients
+expect. Adapter lets classes work together that couldn't otherwise
+because of incompatible interfaces.
+</p>
+
+</div>
+
+<p>
+This pattern is applied in situations where you have a component which
+provides some functionality you require in your program, but does not
+provide the required interface.
+</p>
+
+<p>
+Two varieties of adapter exist: class adapter vs. object adapter.
+</p>
+
+<p>
+Use the following function to check that you have completed the
+exercises correctly.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ac0810;">def</span> <span style="color: #127325;">test</span>(Map):
+    <span style="color: #1ddf11;">m</span> = Map()
+    <span style="color: #666644;"># </span><span style="color: #666644;">The object starts out empty</span>
+    <span style="color: #ac0810;">assert</span> m.size() == 0
+    <span style="color: #666644;"># </span><span style="color: #666644;">Adding two mappings, grows its size to two.</span>
+    m.insert(2,4)
+    m.insert(3,9)
+    <span style="color: #ac0810;">assert</span> m.size() == 2
+    <span style="color: #666644;"># </span><span style="color: #666644;">The entered mappings can be looked up</span>
+    <span style="color: #ac0810;">assert</span> m.lookup(3) == 9
+    <span style="color: #666644;"># </span><span style="color: #666644;">But others just give None</span>
+    <span style="color: #ac0810;">assert</span> m.lookup(4) == <span style="color: #ff00ff;">None</span>
+    <span style="color: #666644;"># </span><span style="color: #666644;">Removing non-existent keys is silently does nothing</span>
+    <span style="color: #ac0810;">assert</span> m.remove(4) == <span style="color: #ff00ff;">None</span>
+    <span style="color: #ac0810;">assert</span> m.size() == 2
+    <span style="color: #666644;"># </span><span style="color: #666644;">Removing existing keys silently reduces the size</span>
+    <span style="color: #ac0810;">assert</span> m.remove(2) == <span style="color: #ff00ff;">None</span>
+    <span style="color: #ac0810;">assert</span> m.size() == 1
+    <span style="color: #666644;"># </span><span style="color: #666644;">does_map checks for presence of keys</span>
+    <span style="color: #ac0810;">assert</span>     m.does_map(3)
+    <span style="color: #ac0810;">assert</span> <span style="color: #ac0810;">not</span> m.does_map(2)
+    <span style="color: #ac0810;">print</span> Map.<span style="color: #b0c4de;">__name__</span> + <span style="color: #4463ca;">" passed the tests"</span>
+</pre>
+</div>
+
+<p>
+In order to use <code>test</code>, you should pass it the implementation class
+that you wish to test, as an argument. Recall that classes are
+first-class objects in Python, and can therefore be passed as
+arguments to functions without further ado.
+</p>
+
+<p>
+By looking at the source code of <code>test</code>, you should be able to infer
+that the class should implement a mapping data structure, which can
+perform lookups from keys to values in key-value pairs (associations)
+that have been entered into the data structure. It should be able to
+report the number of associantions present, and it should allow the
+removal of associations, by passing the association's key to the
+appropriate method.
+</p>
+
+<p>
+Python has a built-in type (<code>dict</code>) which can do all the things that
+the test requires, but the interface provided by <code>dict</code> does not match
+the required interface.
+</p>
+
+<div class="exercise">
+<p>
+Write classes which satisfy the requrements imposed by <code>test</code> by
+adapting <code>dict</code>'s interface.
+</p>
+
+<p>
+You should do this in two different ways:
+</p>
+
+<ol class="org-ol">
+<li>Class adapter: a subclass of <code>dict</code>.</li>
+<li>Object adapter: stores a <code>dict</code> instance as a datum.</li>
+</ol>
+
+</div>
+
+<p>
+Make sure that <b>both</b> of your adapters pass the test: If you execute
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="orgd071f6d">test(CMap)
+test(OMap)
+</pre>
+</div>
+
+<p>
+you should see
+</p>
+
+<pre class="example">CMap passed the tests
+OMap passed the tests
+</pre>
+
+<p>
+As this is our first pattern and we are just warming up, model
+solutions are shown below (though you are still encouraged to have a
+go yourself). For subsequent exercises, model solutions will be
+provided after the exercise has been completed.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="org7b897e9"><span style="color: #666644;"># </span><span style="color: #666644;">Class adapter</span>
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">CMap</span>(<span style="color: #b0c4de;">dict</span>): <span style="color: #666644;"># </span><span style="color: #666644;">NB, in static languages this would inherit the</span>
+                  <span style="color: #666644;"># </span><span style="color: #666644;">Target interface in addition to the Adaptee interface</span>
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">lookup</span>(<span style="color: #ac0810;">self</span>, key): 
+        <span style="color: #ac0810;">try</span>:
+            <span style="color: #ac0810;">return</span> <span style="color: #ac0810;">self</span>[key]
+        <span style="color: #ac0810;">except</span> <span style="color: #917b17;">KeyError</span>:
+            <span style="color: #ac0810;">return</span> <span style="color: #ff00ff;">None</span>
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">insert</span>(<span style="color: #ac0810;">self</span>, key, value):
+        <span style="color: #ac0810;">self</span>[key] = value
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">remove</span>(<span style="color: #ac0810;">self</span>, key):
+        <span style="color: #ac0810;">try</span>:
+            <span style="color: #ac0810;">del</span> <span style="color: #ac0810;">self</span>[key]
+        <span style="color: #ac0810;">except</span> <span style="color: #917b17;">KeyError</span>:
+            <span style="color: #ac0810;">pass</span>
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">does_map</span>(<span style="color: #ac0810;">self</span>, key):
+        <span style="color: #ac0810;">return</span> key <span style="color: #ac0810;">in</span> <span style="color: #ac0810;">self</span>
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">size</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #b0c4de;">len</span>(<span style="color: #ac0810;">self</span>)
+
+
+<span style="color: #666644;"># </span><span style="color: #666644;">Object adapter</span>
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">OMap</span>: <span style="color: #666644;"># </span><span style="color: #666644;">NB in static languages this would inherit the Target interface</span>
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">__init__</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">self</span>._store = {}
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">lookup</span>(<span style="color: #ac0810;">self</span>, key):
+        <span style="color: #ac0810;">try</span>:
+            <span style="color: #ac0810;">return</span> <span style="color: #ac0810;">self</span>._store[key]
+        <span style="color: #ac0810;">except</span> <span style="color: #917b17;">KeyError</span>:
+            <span style="color: #ac0810;">return</span> <span style="color: #ff00ff;">None</span>
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">insert</span>(<span style="color: #ac0810;">self</span>, key, value):
+        <span style="color: #ac0810;">self</span>._store[key] = value
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">remove</span>(<span style="color: #ac0810;">self</span>, key):
+        <span style="color: #ac0810;">try</span>:
+            <span style="color: #ac0810;">del</span> <span style="color: #ac0810;">self</span>._store[key]
+        <span style="color: #ac0810;">except</span> <span style="color: #917b17;">KeyError</span>:
+            <span style="color: #ac0810;">pass</span>
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">does_map</span>(<span style="color: #ac0810;">self</span>, key):
+        <span style="color: #ac0810;">return</span> key <span style="color: #ac0810;">in</span> <span style="color: #ac0810;">self</span>._store
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">size</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #b0c4de;">len</span>(<span style="color: #ac0810;">self</span>._store)
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org6e96b0c" class="outline-4">
+<h4 id="org6e96b0c"><span class="section-number-4">3.1.1</span> Changing the type</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+C++ distinguishes between private, protected and public inheritance:
+you would use private inheritance in the class adapter, if you do not
+wish the original interface of the component to be mixed with the
+target interface.
+</p>
+
+<p>
+In this way, the adapted object does not implement the original
+interface. Its formal type has changed.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org355d63d" class="outline-4">
+<h4 id="org355d63d"><span class="section-number-4">3.1.2</span> Two-way adapters</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<p>
+Sometimes your objects will need to be shared between clients which
+expect different interfaces: you want the adapted object to implement
+both the adapted and the original interface. In this case you would
+inherit the original interface publicly.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb57c473" class="outline-4">
+<h4 id="orgb57c473"><span class="section-number-4">3.1.3</span> Class diagram</h4>
+<div class="outline-text-4" id="text-3-1-3">
+
+<div class="figure">
+<p><object type="image/svg+xml" data="Object-Oriented%20Design%20Patterns_files/class-adapter.xml">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+
+<div class="figure">
+<p><object type="image/svg+xml" data="Object-Oriented%20Design%20Patterns_files/object-adapter.xml">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2d87403" class="outline-4">
+<h4 id="org2d87403"><span class="section-number-4">3.1.4</span> Comparison to other Patterns</h4>
+<div class="outline-text-4" id="text-3-1-4">
+<p>
+Adapter is a reactive pattern: you use it to solve problems in
+pre-existing situations.
+</p>
+
+<p>
+Structurally, Adapter is very similar to Bridge. One of the biggest
+distinctions between the two is their intent. Bridge is applied a
+priori: you pre-meditate its use, in order to make things easier in
+the future.
+</p>
+
+<p>
+This is a recurring theme in this course: we will meet other pairs of
+patterns whose major difference is apparent in their <b>intent</b> rather
+than their structure.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfe63139" class="outline-3">
+<h3 id="orgfe63139"><span class="section-number-3">3.2</span> Decorator</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="buzzphrase">
+<p>
+Attach additional responsibilities to an object
+dynamically. Decorators provide a flexible alternative to subclassing
+for extending functionality.
+</p>
+
+</div>
+
+<p>
+Do the exercise described in <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/decorator.py">here</a>.
+</p>
+
+<p>
+Python's function and class decorators are a related to the Decorator
+pattern.
+</p>
+
+<p>
+Decorator vs Strategy: changing skin vs guts.
+</p>
+
+<p>
+Java streams.
+</p>
+
+<p>
+Avoids class explosion, and huge classes high in the hierarchy.
+</p>
+
+<p>
+Loss of identity.
+</p>
+</div>
+
+<div id="outline-container-orgd219222" class="outline-4">
+<h4 id="orgd219222"><span class="section-number-4">3.2.1</span> Class diagram</h4>
+<div class="outline-text-4" id="text-3-2-1">
+
+<div class="figure">
+<p><object type="image/svg+xml" data="Object-Oriented%20Design%20Patterns_files/decorator.xml">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge914553" class="outline-3">
+<h3 id="orge914553"><span class="section-number-3">3.3</span> Template Method</h3>
+<div class="outline-text-3" id="text-3-3">
+<div class="buzzphrase">
+<p>
+Define the skeleton of an algorithm in an operation, deferring some
+steps to to subclasses. Template Method lets subclasses redefine
+certain steps of an algorithm without changing the algorithm's
+structure.
+</p>
+
+</div>
+
+<p>
+Inspect <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/template_method.py">this code</a>.
+</p>
+
+<p>
+This pattern is ubiquitous in OOP. Many of you have probably used this
+pattern many times in your code, often without realizing that it's the
+subject of a whole chapter in a famous book.
+</p>
+
+<p>
+Notice <code>hook</code> in the sample code. Hooks allow for the inclusion of
+optional steps in the algorithm.
+</p>
+
+<p>
+Python is very lax about such things, but statically typed languages
+will place much stronger restrictions on what the subclass implementor
+may or must do. Specifically, you need to understand the implications
+of the presence or absence of <code>virtual</code> (C++) and <code>final</code> (Java).
+</p>
+
+
+<div class="figure">
+<p><object type="image/svg+xml" data="Object-Oriented%20Design%20Patterns_files/template-method.xml">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd0148a3" class="outline-3">
+<h3 id="orgd0148a3"><span class="section-number-3">3.4</span> Singleton</h3>
+<div class="outline-text-3" id="text-3-4">
+<div class="buzzphrase">
+<p>
+Ensure a class only has one instance, and provide a global point of
+access to it.
+</p>
+
+</div>
+
+<p>
+This is essentially a fancy means of sharing global state.
+</p>
+
+<p>
+Use the Singleton pattern when you need a globally accessible object,
+which should not be duplicated.
+</p>
+
+<p>
+This pattern has got a bad reputation for two reasons
+</p>
+
+<ul class="org-ul">
+<li>It is, by far, the simplest of all the GoF patterns, and therefore
+the only one that a large number of people understand. It gets
+talked about far too much.</li>
+
+<li>Shared global mutable state is a major source of problems in
+software. Many people have the tendency to take a badly designed
+program which uses lots of shared mutable global state, hide it in
+singletons, and claim that the program is has a modern
+best-practices architecture. Bleargh!</li>
+</ul>
+
+
+<p>
+Investigating this Pattern in Python doesn't make much sense, as it's
+implementation in Java and C++ relies on completely different
+mechanisms from the ones you would use in Python.
+</p>
+
+<p>
+Singletons in Java and C++ are based on the following principles:
+</p>
+
+<ul class="org-ul">
+<li>All constructors must be private (in C++11 the could be deleted), to
+prevent clients from instantiating the class.</li>
+
+<li>A public static method, which acts as the pseudo-constructor.</li>
+
+<li>A private internal handle to the unique instance of the
+Singleton.</li>
+
+<li>The first time the pseudo-constructor is called, it creates the
+instance and stores it. On subsequent calls, it notices that the
+instance is already there and simply returns it.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8925600" class="outline-3">
+<h3 id="org8925600"><span class="section-number-3">3.5</span> Abstract Factory</h3>
+<div class="outline-text-3" id="text-3-5">
+<div class="buzzphrase">
+<p>
+Provide an interface for creating families of related or dependent
+objects without specifying their concrete classes.
+</p>
+
+</div>
+
+<p>
+Do <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/abstract_factory_exercise.py">this</a> exercise.
+</p>
+
+<p>
+AbstractFactory classes often implemented with Factory Methods,
+sometimes Prototype.
+Concrete factory is often a Singleton
+</p>
+</div>
+
+<div id="outline-container-orgeea2b16" class="outline-4">
+<h4 id="orgeea2b16"><span class="section-number-4">3.5.1</span> Change exercise</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<p>
+Present a working solution based on an collection of first-class
+classes. Get them to recast it in Java/C++ terms, to produce the
+pattern.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org64d34d3" class="outline-3">
+<h3 id="org64d34d3"><span class="section-number-3">3.6</span> Factory Method</h3>
+<div class="outline-text-3" id="text-3-6">
+<div class="buzzphrase">
+<p>
+Define an interface for creating an object, but let subclasses decide
+which class to instantiate. Factory Method lets a class defer
+instantiation to subclasses.
+</p>
+
+</div>
+
+<p>
+Do <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/factory_method_exercise.py">this</a> exercise.
+</p>
+
+<p>
+Often called in Template Methods
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf0ac68c" class="outline-3">
+<h3 id="orgf0ac68c"><span class="section-number-3">3.7</span> State</h3>
+<div class="outline-text-3" id="text-3-7">
+<p>
+TODO: talk about frendship implementation in Java: put them in the
+same package and don't say private or public, that effectively makes
+them friends.
+</p>
+
+<div class="buzzphrase">
+<p>
+Allow an object to alter its behaviour when its internal state
+changes. The object will appear to change its class.
+</p>
+
+</div>
+
+<p>
+Do the exercise described <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/state.py">here</a>.
+</p>
+
+<p>
+Draw the class and object diagrams.
+</p>
+
+<p>
+Preserves object identity.
+</p>
+
+<p>
+Reflex example
+</p>
+
+
+<div class="figure">
+<p><object type="image/svg+xml" data="Object-Oriented%20Design%20Patterns_files/state.xml">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+<p>
+(Class diagram identical to Strategy)
+</p>
+</div>
+</div>
+<div id="outline-container-org11dfe0d" class="outline-3">
+<h3 id="org11dfe0d"><span class="section-number-3">3.8</span> Strategy</h3>
+<div class="outline-text-3" id="text-3-8">
+<p>
+TODO: change the exercise so that the passing of self which we had to
+do in State become apparent.
+</p>
+
+<div class="buzzphrase">
+<p>
+Define a family of algorithms, encaplusate each one, and make them
+interchangeable. Strategy lets the algorithm vary independently from
+clients that use it.
+</p>
+
+</div>
+
+<p>
+What's missing in the following table?
+</p>
+
+<table rules="groups" frame="hsides" border="2" cellpadding="6" cellspacing="0">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Factory Method</td>
+<td class="org-left">Abstract Factory</td>
+</tr>
+
+<tr>
+<td class="org-left">Template Method</td>
+<td class="org-left">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Do <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/strategy_exercise.py">this exercise</a>. Do you see how it fits into the table above?
+</p>
+
+<p>
+From the perspective of first-class functions
+</p>
+
+<ul class="org-ul">
+<li>Passing a function to some other object in order to parametrize its
+behaviour, is a simple use of the Strategy pattern.</li>
+
+<li>You can make this slightly more sophisticated by passing a
+collection of related functions, rather than a single one.</li>
+
+<li>Next, if you allow that collection of functions to share some state,
+you have the full-blown Strategy pattern.</li>
+</ul>
+
+<p>
+Parametrizing an object with orthogonal strategies, can be a good way
+of avoiding class-explosion.
+</p>
+
+<p>
+Reduces subclassing and conditional statements. Increases run-time
+configurability.
+</p>
+
+<hr>
+<p>
+Compare to Template Method: changing algorithm by delegation as
+opposed to inheritance.
+</p>
+
+<p>
+Decorator changes skin; Strategy changes guts:
+Preserves object identity
+</p>
+
+<p>
+Class diagram identical to State.
+</p>
+
+<div class="figure">
+<p><object type="image/svg+xml" data="Object-Oriented%20Design%20Patterns_files/strategy.xml">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb88dcab" class="outline-3">
+<h3 id="orgb88dcab"><span class="section-number-3">3.9</span> Facade</h3>
+<div class="outline-text-3" id="text-3-9">
+<div class="buzzphrase">
+<p>
+Provide a unified interface to a set of interfaces in a
+subsystem. Facade defines a higher-level interface that makes the
+subsystem easier to use.
+</p>
+
+</div>
+
+<p>
+Provides higher-level interface, but low-level access still available
+by going around the facade.
+</p>
+
+<p>
+No meaningful class diagram can be drawn: it's always done in an
+ad-hoc fashion.
+</p>
+
+<p>
+The 'demist' button in my car, switches on the heating to full blast,
+directs the airflow at the windscreen and switches on the rear-window
+defroster.
+</p>
+
+<p>
+Do <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/facade_exercise.py">this exercise</a>.
+</p>
+
+<p>
+The original classes have not been touched, changed or hidden in any
+way. The Facade merely provides an additional, more convenient way of
+controlling the components, but poses no restrictions on the use of
+the components.
+</p>
+
+<p>
+Difference between Adapter &amp; Facade is intent: alteration vs
+simplification.
+</p>
+
+<p>
+A Facade is often a Singleton
+</p>
+</div>
+</div>
+
+<div id="outline-container-org94787ec" class="outline-3">
+<h3 id="org94787ec"><span class="section-number-3">3.10</span> Proxy</h3>
+<div class="outline-text-3" id="text-3-10">
+<div class="buzzphrase">
+<p>
+Provide a surrogate or placeholder for another object to control
+access to it.
+</p>
+
+</div>
+
+<p>
+Do <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/proxy_exercise.py">this exercise</a>.
+</p>
+
+<p>
+Many different kinds of proxy exist
+</p>
+
+<dl class="org-dl">
+<dt>Remote</dt><dd>The real object exists on some other machine. The local
+proxy encapsulates the communication, and makes the remote
+object useable in the same way as it would be if it were local.</dd>
+
+<dt>Virtual (creation)</dt><dd>A hollow shell, which creates the real object
+if and when it becomes needed.</dd>
+
+<dt>Copy on Write</dt><dd>When an object is copied, copying of the contents
+is delayed. When the copied object is inspected,
+the proxy forwards the request to the original. If
+the copied object or the original is <b>modified</b>,
+then the states of the two have to diverge, and the
+proxy must perform a true copy of the original.</dd>
+
+<dt>Caching</dt><dd>Remembers old results returned by the subject and returns
+them, when applicable, thus avoiding repeating the
+work. (Our code sample.)</dd>
+
+<dt>etc.</dt><dd>Many more varieties exist.</dd>
+</dl>
+</div>
+
+<div id="outline-container-org215b885" class="outline-4">
+<h4 id="org215b885"><span class="section-number-4">3.10.1</span> Decorator</h4>
+<div class="outline-text-4" id="text-3-10-1">
+<p>
+Note that, structurally, Proxy and Decorator look identical. The only
+difference between these patterns is their intent.
+</p>
+
+<p>
+Decorator addresses 
+</p>
+
+<ul class="org-ul">
+<li>changes of behaviour</li>
+<li>run-time configurability</li>
+<li>composability of orthogonal features</li>
+<li>avioding class explosion</li>
+</ul>
+
+<p>
+Proxy addresses intervention in access to a component, which may be
+done for very many reasons, including
+</p>
+
+<ul class="org-ul">
+<li>optimization</li>
+<li>access control</li>
+<li>spying</li>
+<li>faking identity</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org633f88b" class="outline-4">
+<h4 id="org633f88b"><span class="section-number-4">3.10.2</span> Class diagram</h4>
+<div class="outline-text-4" id="text-3-10-2">
+
+<div class="figure">
+<p><object type="image/svg+xml" data="Object-Oriented%20Design%20Patterns_files/proxy.xml">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org866d09d" class="outline-3">
+<h3 id="org866d09d"><span class="section-number-3">3.11</span> Observer</h3>
+<div class="outline-text-3" id="text-3-11">
+<p>
+TODO: the exercise makes it look like all observers have a display()
+method, which leads to the temptation to use it in the subject. So
+change the exercise to include an observer which does something
+completely different.
+</p>
+
+<div class="buzzphrase">
+<p>
+Define a one-to-many dependency between objects so that when one
+object changes state, all its dependents are notified and updated
+automatically.
+</p>
+
+</div>
+
+<p>
+Do <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/observer_exercise.py">this</a> exercise.
+</p>
+
+<p>
+How much information is passed? Push-pull spectrum.
+</p>
+
+<p>
+How is notification triggered: by each state-changing operation
+automatically, or by clients' responsibility? (Many consecutive
+changes, transactions)
+</p>
+
+<p>
+Ensure consistency of internal state before notification.
+</p>
+
+<p>
+Unexpected updates -&gt; cost (observers don't know about eachother, so
+they might trigger changes to which all others must respond.)
+</p>
+
+<p>
+Observing more than one subject?
+</p>
+
+<p>
+Java has built-in interfaces for this pattern.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org725cb1e" class="outline-3">
+<h3 id="org725cb1e"><span class="section-number-3">3.12</span> Command</h3>
+<div class="outline-text-3" id="text-3-12">
+<div class="buzzphrase">
+<p>
+Encapsulate a request as an object, thereby letting you parametrize
+clients with different requests, queue or log requests, and support
+undoable operations.
+</p>
+
+</div>
+
+<p>
+Do <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/command_exercise.py">these</a> exercises.
+</p>
+
+<p>
+Undo, hysteresis, memento.
+</p>
+
+<p>
+Queue commands.
+</p>
+
+<p>
+Macro command (Composite, see later)
+</p>
+
+<p>
+It's a callback.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4de55ce" class="outline-3">
+<h3 id="org4de55ce"><span class="section-number-3">3.13</span> Composite</h3>
+<div class="outline-text-3" id="text-3-13">
+<div class="buzzphrase">
+<p>
+Compose objects into tree structures to represent part-whole
+hierarchies. Composite lets clients treat individual objects and
+compositions of objects uniformly.
+</p>
+
+</div>
+
+<p>
+Hierarchical data structures, or data structures with a tree-like
+shape are very common. Many situations can be simplified significanly,
+by allowing terminal and non-terminal nodes (leaves and branches) to
+be treated identically.
+</p>
+
+<p>
+As an example of a structure which exhibits such a terminal
+vs. non-terminal duality, let's consider a menu.
+</p>
+
+<ul class="org-ul">
+<li>The non-terminal components are submenus</li>
+<li>The terminal components are the choices offered by the menu</li>
+</ul>
+
+<p>
+Do <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/composite_exercise.py">this exercise</a>.
+</p>
+
+<p>
+Notice that there are conflicting pressures on the interfaces of the
+composite and the leaf: Composites and Leaves should have the same
+interface, but clearly methods for the management of Composites'
+components need to be present in the interface of Component, but not
+int the interface of the Leaves. In our case, this becomes clear when
+you consider the <code>add_item</code> method: it is necessary in the Composite,
+but inappropriate in the Leaf.
+</p>
+
+<p>
+The two obvious ways of resolving this conflict are
+</p>
+
+<ul class="org-ul">
+<li>Downcasting from <code>Component</code> to <code>Composite</code> when you need to use
+<code>add_method</code>.</li>
+
+<li>Make <code>add_method</code> an null operation or make it give an error, for
+those types in which it makes no sense.</li>
+</ul>
+
+<p>
+Exercise: Revisit the command exercise. Apply the composite pattern to
+your commands, and introduce <i>Macro commands</i>: commands made up of a
+collection of other commands. Make sure undo still works.
+</p>
+
+<p>
+TODO: macro command model solution is still missing
+</p>
+</div>
+
+<div id="outline-container-org22392da" class="outline-4">
+<h4 id="org22392da"><span class="section-number-4">3.13.1</span> Class diagram</h4>
+<div class="outline-text-4" id="text-3-13-1">
+
+<div class="figure">
+<p><object type="image/svg+xml" data="Object-Oriented%20Design%20Patterns_files/composite.xml">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc4e8ebb" class="outline-4">
+<h4 id="orgc4e8ebb"><span class="section-number-4">3.13.2</span> Interface considerations</h4>
+<div class="outline-text-4" id="text-3-13-2">
+<p>
+How do you deal with the pressure to have different interfaces in the
+Leaf and the Composite?
+</p>
+
+<ol class="org-ol">
+<li>Null ops</li>
+<li>Downcasting</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgedc4d98" class="outline-3">
+<h3 id="orgedc4d98"><span class="section-number-3">3.14</span> Iterator</h3>
+<div class="outline-text-3" id="text-3-14">
+<div class="buzzphrase">
+<p>
+Provide a way to access the elements of an aggregate object
+sequentially without exposing its underlying representation.
+</p>
+
+</div>
+
+<p>
+Try the following in an interactive Python session.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ac0810;">def</span> <span style="color: #127325;">show</span>(iterable):
+    <span style="color: #ac0810;">for</span> item <span style="color: #ac0810;">in</span> iterable:
+        <span style="color: #ac0810;">print</span> item
+
+show([1,2,3,4])
+show({1:1, 2:4, 3:9, 4:16})
+show(<span style="color: #b0c4de;">open</span>(<span style="color: #4463ca;">'/etc/passwd'</span>))
+</pre>
+</div>
+
+<p>
+We have accessed the elements contained in three completely different
+objects, but the way we accessed them has been uniform. We used
+Python's <code>for</code>-loop to access Python's iterator protocol, but we could
+have invoked the iterators directly ourselves. Here is how you would
+rewrite <code>show</code> to make direct use of the iterators:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ac0810;">def</span> <span style="color: #127325;">show</span>(iterable):
+    <span style="color: #1ddf11;">iterator</span> = <span style="color: #b0c4de;">iter</span>(iterable)
+    <span style="color: #ac0810;">try</span>:
+        <span style="color: #ac0810;">while</span> <span style="color: #ff00ff;">True</span>:
+            <span style="color: #ac0810;">print</span> iterator.<span style="color: #b0c4de;">next</span>()
+    <span style="color: #ac0810;">except</span> <span style="color: #917b17;">StopIteration</span>:
+        <span style="color: #ac0810;">pass</span>
+</pre>
+</div>
+
+<p>
+Iterators come in two distinct varieties
+</p>
+
+<ol class="org-ol">
+<li>External iterators</li>
+<li>Internal iterators</li>
+</ol>
+
+<p>
+Inspect <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/iterator_trivial_demo.py">this code</a> to see the difference between external and internal
+iterators.
+</p>
+
+<p>
+External iterators are controlled from the outside: their clients get
+to decide when and how the iterator is advanced. Once you set an
+internal iterator going, you don't have any control over it until it
+terminates.
+</p>
+
+<p>
+Python has external iterators built in to the language, but Python's
+<code>for</code>-loops use them (essentially) to implement internal iteration.
+</p>
+
+<p>
+Python's built-in iterator protocol is very simple: it only provides
+the means to advance the iterator forwards by one step, and discover,
+a posteriori, what the element was or that no further data are left in
+the iteartor. In general, you can create iterators with richer
+interfaces (such as go to start/end, go forwards/backwards, step size,
+look ahead).
+</p>
+
+<p>
+Note that <code>__iter__</code> is a (very simple) <i>Factory Method</i>.
+</p>
+
+<p>
+Now do <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/iterator_exercise.py">this exercise</a>.
+</p>
+
+<p>
+By decoupling iteration from the collection object, Iterator
+</p>
+
+<ol class="org-ol">
+<li>Simplifies collection interface,</li>
+<li>Allows multiple iterations to be in progress simultaneously (in the
+case of external iterators).</li>
+</ol>
+
+
+<p>
+Ruby tends to use internal iterators:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-ruby">[1,2,3,4].each{|n| n*n}
+</pre>
+</div>
+
+<p>
+Now <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/composite_with_iterator_exercise.py">make iterators for a composite</a>.
+</p>
+
+<p>
+Terminology:
+</p>
+
+<dl class="org-dl">
+<dt>Cursor</dt><dd>An alternative name for <i>Iterator</i>. (Some people use
+the terms <i>cursor</i> and <i>iterator</i> to refer to two
+distinct but related concepts. I don't think that
+there is strong agreement on exactly what the
+distinction is.)</dd>
+<dt>NullIterator</dt><dd>Always finished; useful for traversing
+composites.</dd>
+<dt>Robust iteraton</dt><dd>Can you modify the container while traversing?</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org5770c38" class="outline-3">
+<h3 id="org5770c38"><span class="section-number-3">3.15</span> Bridge</h3>
+<div class="outline-text-3" id="text-3-15">
+<div class="buzzphrase">
+<p>
+Decouple an abstraction from its implementation so that the two can
+vary independently.
+</p>
+
+</div>
+
+<p>
+Do this <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/bridge_exercise.py">exercise</a>.
+</p>
+
+<p>
+Similar to Strategy, Abstract Factory and Adapter.
+</p>
+
+<p>
+An alternative name for Bridge is <i>Pointer to Implementation</i>
+(<i>pimpl</i>). It is this pointer which acts as a bridge between two sides
+of the pattern, the abstraction and the implementation.
+</p>
+
+<ul class="org-ul">
+<li>In Strategy the emphasis is on varying the details of how some
+algorithm is preformed. It is essentially about first-class
+functions. Bridge must maintain an internal handle to the
+implementation, in Strategy this is often absent: a Strategy may be
+received by the algorithm, used and immediately forgotten.</li>
+
+<li>In Abstract Factory the emphasis is on creation of objects: its
+alternative name <i>Kit</i> is quite suggestive. It emphasises the idea
+of giving a higher intelligence a choice of (often related)
+components. It is essentially about first-class classes. Abstract
+Factory does not address what happens once an object has been
+created.</li>
+
+<li><p>
+In Adapter the emphasis is on taking existing components and making
+them work together. 
+</p>
+
+<p>
+Adapter is reactive: you apply it in response to an existing
+condition.
+</p></li>
+
+<li><p>
+In Bridge the emphasis is on providing a rich interface of
+components, without committing to any particular implementation of
+those components. Perhaps the clearest example is that of back-end
+independent graphics programs. On one side of the bridge you provide
+an interface for drawing a variety of shapes (circle, square,
+triangle, etc.) or maybe a variety of widgets (window, scrollbar,
+button, menu, etc.); the bridge then connects these hollow
+interfaces to interchangeable (and expandable) sets of concrete
+implementations: the shapes might be rendered by OpenGL, DirectX,
+etc.; the widgets might by drawn by Motif, GTK, Qt, etc.
+</p>
+
+<p>
+Bridge differs from Strategy in the need to maintain a single single
+pointer from abstraction to implementation (the bridge).
+</p>
+
+<p>
+Bridge differs from Abstract Factory by addressing the state and
+organization of some object, while Abstract Factory deals with
+objects' creation. Bridge intends to prevent a class explosion:
+Adapter makes two existing components work together.
+</p>
+
+<p>
+Bridge differs from Adapter in that it is pre-meditated: Adapter is
+typically a reaction to an existing mismatch.
+</p></li>
+</ul>
+
+<p>
+The GoF classify the patterns into 3 different categories: Creational,
+Structural and Behavioural. Abstract Factory is creational, Strategy
+is Behavioural, Bridge is Structural.
+</p>
+
+<p>
+An Abstract Factory is often used to create one side of a Bridge.
+</p>
+
+<p>
+An Adapter is often used on one side of a Bridge.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org239ad81" class="outline-3">
+<h3 id="org239ad81"><span class="section-number-3">3.16</span> Memento</h3>
+<div class="outline-text-3" id="text-3-16">
+<p>
+TODO link to the exercise. Change the starting point to include the
+macro command. (Don't forget to demonstrate the development of the
+solution on the screen!)
+</p>
+
+<div class="buzzphrase">
+<p>
+Without violating encapsulation, capture and externalize an object's
+internal state so that the object can be restored to this state later.
+</p>
+
+</div>
+
+<p>
+TODO: class diagram
+</p>
+
+<p>
+GOF says:
+</p>
+
+<ul class="org-ul">
+<li>Originator
+<ul class="org-ul">
+<li>creates a memento containing a snapshot of its internal state</li>
+<li>uses the mement ot restore its internal state</li>
+</ul></li>
+<li>Caretaker
+<ul class="org-ul">
+<li>is responsible for the memento's safekeeping</li>
+<li>never operates on or examines the contents of a memento</li>
+</ul></li>
+</ul>
+
+<p>
+Exercise: Use a memento to implement the undo functinality of our
+earlier lift-controlling menu. 
+</p>
+</div>
+
+<div id="outline-container-orgb77854e" class="outline-4">
+<h4 id="orgb77854e"><span class="section-number-4">3.16.1</span> Difficulties</h4>
+<div class="outline-text-4" id="text-3-16-1">
+<p>
+The obvious caretaker is the Menu, but this has no knowledge of the
+lifts (they are encapsulated within the commands), so it can't act as
+the caretaker.
+</p>
+
+<p>
+Could create a separate caretaker object, which stores a history of
+lifts' mementos. It will provide an undo method which will be
+installed in the Menu as a command. This caretaker will have to be
+told when a lift has been moved, so that it can add an item to the
+history. Two solutions come to mind:
+</p>
+
+<ol class="org-ol">
+<li>Turn the lift moving commands into macro commands which tell the
+caretaker that a move is being made, just before performing the
+move.</li>
+
+<li>Make the caretaker an observer of the lifts.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfd035f1" class="outline-3">
+<h3 id="orgfd035f1"><span class="section-number-3">3.17</span> Builder</h3>
+<div class="outline-text-3" id="text-3-17">
+<div class="buzzphrase">
+<p>
+Separate the construction of a complex object from its representation
+so that the same construction process can create different
+reprenestations.
+</p>
+
+</div>
+
+<p>
+Do <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/builder_exercise.py">this exercise</a>.
+</p>
+
+<p>
+Discuss Builder vs. Factory Method vs. AbstractFactory
+</p>
+</div>
+
+<div id="outline-container-org373b094" class="outline-4">
+<h4 id="org373b094"><span class="section-number-4">3.17.1</span> Class diagram</h4>
+<div class="outline-text-4" id="text-3-17-1">
+
+<div class="figure">
+<p><object type="image/svg+xml" data="Object-Oriented%20Design%20Patterns_files/builder.xml">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6c67dd6" class="outline-3">
+<h3 id="org6c67dd6"><span class="section-number-3">3.18</span> Visitor</h3>
+<div class="outline-text-3" id="text-3-18">
+<div class="buzzphrase">
+<p>
+Represent an operation to be performed on the elements of an object
+structure. Visitor lets you define a new operation without changing
+the classes of the elements on which it operates.
+</p>
+
+</div>
+
+<p>
+We will approach this one slowly, from a number of different angles.
+</p>
+</div>
+
+<div id="outline-container-orge852ec2" class="outline-4">
+<h4 id="orge852ec2"><span class="section-number-4">3.18.1</span> Dynamic Dispatch</h4>
+<div class="outline-text-4" id="text-3-18-1">
+<p>
+Consider the following line of C++ or Java (or even Python!).
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++">receiver.message(arg1, arg2);
+</pre>
+</div>
+
+<p>
+Convince yourself that, in general, many different functions might be
+candidates for execution in response to this code. The actual choice
+depends on three different types:
+</p>
+
+<ol class="org-ol">
+<li>The type of <code>receiver</code></li>
+<li>The type of <code>arg1</code></li>
+<li>The type of <code>arg2</code></li>
+</ol>
+
+<p>
+Note that <code>receiver</code> is an argument of the function <code>message</code>, but it
+is special in two ways:
+</p>
+
+<ol class="org-ol">
+<li>It appears in a funny place: rather than appearing in the argument
+list, it is pushed out in front of the function name.</li>
+<li>It is the only one whose type is checked at <i>run-time</i>; the types
+of <code>arg1</code> and <code>arg1</code> are checked at compile time.</li>
+</ol>
+
+<p>
+In Python it is fairly obvious that <code>receiver</code> is an argument of
+<code>message</code> because <code>self</code> appears explicitly in <code>message</code>'s parameter
+list. In Java, C++ and the like, this is more easily overlooked,
+because <code>this</code> is hidden from view.
+</p>
+
+<p>
+The process of finding which of a set of possible candidate functions,
+should be called in any given situation, is known as <i>dispatch</i> or
+<i>binding</i>.
+</p>
+
+<p>
+Actions perfomed at compile time are sometimes called <i>static</i> in
+contrast to those performed at run time, which would then be called
+<i>dynamic</i>. This distinction is sometimes expressed using the words
+<i>late</i> (run-time) and <i>early</i> (compile-time).
+</p>
+
+<p>
+The process of using run-time type information to choose a specific
+implementation of a general operation, is therefore usually referred
+to by one of the following terms
+</p>
+
+<ol class="org-ol">
+<li><i>dynamic dispatch</i></li>
+<li><i>late binding</i></li>
+</ol>
+
+<p>
+It is important to note that <i>message-passing object oriented
+systems</i>, such as those found in C++, Java, C#, Python, Ruby,
+Smalltalk (and pretty much any OOP language you are likely to have
+heard of) have <b>single</b> dynamic dispatch: <b>only one</b> type is involved
+in the run-time part of the decison making process.
+</p>
+
+<p>
+In languages with C-family message passing syntax (Java, C++, Python,
+etc.), the dot between the receiver and the message
+(<code>receiver.message( ... )</code>) is where dynamic dispatch takes place. The
+type before the dot is the <b>only</b> one which is inspected
+dynamically. (In Java and C++, the types of the arguments between the
+parentheses may be inspected in order to choose between overloaded
+methods, but this will take place at compile time. In Python, we could
+inspect these types at run-time inside the function and decide to
+choose different behaviour accordingly: this would be a run-time
+mechanism but it would be an ad-hoc one implemented by the programmer,
+rather than being built into the language).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org19a9a9f" class="outline-4">
+<h4 id="org19a9a9f"><span class="section-number-4">3.18.2</span> Generic functions</h4>
+<div class="outline-text-4" id="text-3-18-2">
+<p>
+Some languages provide <i>multiple dynamic dispatch</i>. Let's see how this
+looks in Common Lisp. Function calls in the Lisp family look like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(plain-function arg-1 arg-2 arg-3)
+</pre>
+</div>
+
+<p>
+In message passing OOP, messages (operations) can be implemented by
+many methods, and the most applicable method must be chosen, at
+runtime, on the basis of the type of the receiver.
+</p>
+
+<p>
+In Common Lisp, <i>generic-functions</i> (operations) can be implemented by
+many methods, and the most applicable method must be chosen, at
+runtime, on the basis of the type of <b>all</b> of its arguments. A generic
+function call looks like this.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(generic-function arg-1 arg-2 arg-3)
+</pre>
+</div>
+
+<p>
+Note that there is no special syntax for generic function calls: they
+look identical to ordinary function calls. Contrast this to message
+passing style, where the receiver is singled out for special
+treatment.
+</p>
+
+<p>
+A simple example implementation would look like this
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(<span style="color: #ac0810;">defclass</span> <span style="color: #917b17;">animal</span> ()    ())
+(<span style="color: #ac0810;">defclass</span> <span style="color: #917b17;">dog</span> (animal) ())
+(<span style="color: #ac0810;">defclass</span> <span style="color: #917b17;">cat</span> (animal) ())
+
+(<span style="color: #ac0810;">defclass</span> <span style="color: #917b17;">toy</span>    ()    ())
+(<span style="color: #ac0810;">defclass</span> <span style="color: #917b17;">ball</span>   (toy) ())
+(<span style="color: #ac0810;">defclass</span> <span style="color: #917b17;">catnip</span> (toy) ())
+
+(<span style="color: #ac0810;">defmethod</span> <span style="color: #127325;">finds</span> ((the-animal dog) (the-toy ball))
+   (format t <span style="color: #4463ca;">"~a brings you the ~a."</span> the-animal the-toy))
+
+(<span style="color: #ac0810;">defmethod</span> <span style="color: #127325;">finds</span> ((the-animal dog) (the-toy catnip))
+   (format t <span style="color: #4463ca;">"~a sniffs the ~a."</span> the-animal the-toy))
+
+(<span style="color: #ac0810;">defmethod</span> <span style="color: #127325;">finds</span> ((the-animal cat) (the-toy ball))
+   (format t <span style="color: #4463ca;">"~a ignores the ~a."</span> the-animal the-toy))
+
+(<span style="color: #ac0810;">defmethod</span> <span style="color: #127325;">finds</span> ((the-animal cat) (the-toy catnip))
+   (format t <span style="color: #4463ca;">"~a goes wild."</span> the-animal))
+</pre>
+</div>
+
+<p>
+From the C++ prespective this looks just like a bunch of overloaded
+functions. The key difference is that Common Lisp generic functions
+dispatch <b>dynamically</b> (they are late binding), while C++'s overloaded
+functions dispatch <b>statically</b> (they are early binding).
+</p>
+
+<p>
+Note that, unlike in message passing OOP, the methods do not belong to
+the class. A third party could add new generic functions operating on
+<b>your</b> classes, or add new methods to <b>your</b> existing generic
+functions. (The same is true for overloaded functions in C++.)
+</p>
+
+<p>
+The term <i>multimethod</i> is often used to describe an operation with
+multiple dynamic dispatch.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7fccf5d" class="outline-4">
+<h4 id="org7fccf5d"><span class="section-number-4">3.18.3</span> DIY Multiple Dynamic dispatch</h4>
+<div class="outline-text-4" id="text-3-18-3">
+<p>
+How could we implement multiple dynamic dispatch in a static,
+non-introspective, single-dispatch language?
+</p>
+
+<p>
+If one dot performs single dynamic dispatch, you could achieve double
+dynamic dispatch by chaining two dots together.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="org9238b70"><span style="color: #ac0810;">from</span> abc <span style="color: #ac0810;">import</span> abstractmethod, ABCMeta
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Animal</span>:
+    <span style="color: #666644;"># </span><span style="color: #666644;">Python magic for making abstract class interfaces explicit</span>
+    <span style="color: #1ddf11;">__metaclass__</span> = ABCMeta
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">__init__</span>(<span style="color: #ac0810;">self</span>, name):
+        <span style="color: #ac0810;">self</span>.name = name
+
+    <span style="color: #917b17;">@abstractmethod</span>
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">finds</span>(<span style="color: #ac0810;">self</span>, toy):
+        <span style="color: #ac0810;">pass</span>
+
+    <span style="color: #666644;"># </span><span style="color: #666644;">The rest of this class is about printed representations: ignore</span>
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">__repr__</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #ac0810;">self</span>.name
+
+    <span style="color: #1ddf11;">__str__</span> = __repr__
+
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Dog</span>(Animal):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">finds</span>(<span style="color: #ac0810;">self</span>, toy):
+        <span style="color: #ac0810;">return</span> toy.found_by_dog(<span style="color: #ac0810;">self</span>)
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Cat</span>(Animal):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">finds</span>(<span style="color: #ac0810;">self</span>, toy):
+        <span style="color: #ac0810;">return</span> toy.found_by_cat(<span style="color: #ac0810;">self</span>)
+
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Toy</span>:
+    <span style="color: #666644;"># </span><span style="color: #666644;">Python magic for making abstract class interfaces explicit</span>
+    <span style="color: #1ddf11;">__metaclass__</span> = ABCMeta
+
+    <span style="color: #917b17;">@abstractmethod</span>
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">found_by_dog</span>(<span style="color: #ac0810;">self</span>, dog):
+        <span style="color: #ac0810;">pass</span>
+
+    <span style="color: #917b17;">@abstractmethod</span>
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">found_by_cat</span>(<span style="color: #ac0810;">self</span>, cat):
+        <span style="color: #ac0810;">pass</span>
+
+    <span style="color: #666644;"># </span><span style="color: #666644;">The rest of this class is about printed representations: ignore</span>
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">__repr__</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #ac0810;">self</span>.__class__.<span style="color: #b0c4de;">__name__</span>
+
+    <span style="color: #1ddf11;">__str__</span> = __repr__
+
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Ball</span>(Toy):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">found_by_dog</span>(<span style="color: #ac0810;">self</span>, dog):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s brings you the %s"</span> % (dog, <span style="color: #ac0810;">self</span>)
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">found_by_cat</span>(<span style="color: #ac0810;">self</span>, cat):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s ignores the %s"</span> % (cat, <span style="color: #ac0810;">self</span>)
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Catnip</span>(Toy):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">found_by_dog</span>(<span style="color: #ac0810;">self</span>, dog):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s sniffs the %s"</span> % (dog, <span style="color: #ac0810;">self</span>)
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">found_by_cat</span>(<span style="color: #ac0810;">self</span>, cat):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s goes wild"</span> % (cat, )
+
+
+<span style="color: #1ddf11;">rover</span> = Dog(<span style="color: #4463ca;">'Rover'</span>)
+<span style="color: #1ddf11;">minou</span> = Cat(<span style="color: #4463ca;">'Minou'</span>)
+
+<span style="color: #1ddf11;">ball</span> = Ball()
+<span style="color: #1ddf11;">catnip</span> = Catnip()
+
+<span style="color: #ac0810;">print</span> rover.finds(catnip)
+<span style="color: #ac0810;">print</span> rover.finds(ball)
+<span style="color: #ac0810;">print</span> minou.finds(ball)
+<span style="color: #ac0810;">print</span> minou.finds(catnip)
+</pre>
+</div>
+
+<p>
+Make sure that you understand how the above code works, and how it
+yields the results
+</p>
+
+<pre class="example">Rover sniffs the Catnip
+Rover brings you the Ball
+Minou ignores the Ball
+Minou goes wild
+</pre>
+
+<p>
+Notice that dynamic dispatch is being performed both on the type of
+the receiver (the animal), but also on the type of the explicit
+argument of <code>finds</code>, the toy.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5b1aa95" class="outline-4">
+<h4 id="org5b1aa95"><span class="section-number-4">3.18.4</span> Extensible set of types</h4>
+<div class="outline-text-4" id="text-3-18-4">
+<p>
+Let's forget about generic functions and multiple dispatch for a
+while, and explore a different dimension.
+</p>
+
+<p>
+Imagine that you provide a library with the following components
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ac0810;">from</span> abc <span style="color: #ac0810;">import</span> abstractmethod, ABCMeta
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Animal</span>:
+    <span style="color: #666644;"># </span><span style="color: #666644;">Python magic for making abstract class interfaces explicit</span>
+    <span style="color: #1ddf11;">__metaclass__</span> = ABCMeta
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">__init__</span>(<span style="color: #ac0810;">self</span>, name):
+        <span style="color: #ac0810;">self</span>.name = name
+
+    <span style="color: #917b17;">@abstractmethod</span>
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">say_hello</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">pass</span>
+
+    <span style="color: #917b17;">@abstractmethod</span>
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">be_happy</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">pass</span>
+
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Dog</span>(Animal):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">say_hello</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s says 'Woof!'"</span> % <span style="color: #ac0810;">self</span>.name
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">be_happy</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s is wagging tail'"</span> % <span style="color: #ac0810;">self</span>.name
+
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Cat</span>(Animal):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">say_hello</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s says 'Meow'"</span> % <span style="color: #ac0810;">self</span>.name
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">be_happy</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s is Purring"</span> % <span style="color: #ac0810;">self</span>.name
+</pre>
+</div>
+
+<p>
+Imagine that a number of clients have been using your library
+successfully for a number of years, when you decide to add new
+components to it:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ac0810;">class</span> <span style="color: #917b17;">Parrot</span>(Animal):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">say_hello</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s Squawks"</span> % <span style="color: #ac0810;">self</span>.name
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">be_happy</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s says 'SQUAAAAAAAAWK!'"</span> % <span style="color: #ac0810;">self</span>.name
+</pre>
+</div>
+
+<p>
+The clients may now use <code>Parrot</code> in their code, but they are also free
+to completely ignore the change. They can continue to run their code
+in complete ignorance of it ever happening.
+</p>
+
+<p>
+You have added a new type into the hierarchy.
+</p>
+
+<p>
+What is more, clients could have written <code>Parrot</code>, and the original
+library code, as well as code written by other clients would
+automatically be able to handle <code>Parrot</code> instances.
+</p>
+
+<p>
+Your library is open for extension by the addition of new types.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4b9b5d8" class="outline-4">
+<h4 id="org4b9b5d8"><span class="section-number-4">3.18.5</span> Extensible set of operations</h4>
+<div class="outline-text-4" id="text-3-18-5">
+<p>
+But what if you wanted to add a new operation into the hierarchy?
+What if you wanted to extend the library by allowing the animals to
+be angry?
+</p>
+
+<p>
+Then you would have to change the interface of the whole hierarchy:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ac0810;">class</span> <span style="color: #917b17;">Animal</span>:
+    <span style="color: #666644;"># </span><span style="color: #666644;">Python magic for formalizing abstract class interfaces</span>
+    <span style="color: #1ddf11;">__metaclass__</span> = ABCMeta
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">__init__</span>(<span style="color: #ac0810;">self</span>, name):
+        <span style="color: #ac0810;">self</span>.name = name
+
+    <span style="color: #917b17;">@abstractmethod</span>
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">say_hello</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">pass</span>
+
+    <span style="color: #917b17;">@abstractmethod</span>
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">be_happy</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">pass</span>
+
+    <span style="color: #917b17;">@abstractmethod</span>
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">be_angry</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">pass</span>
+
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Dog</span>(Animal):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">say_hello</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s says 'Woof!'"</span> % <span style="color: #ac0810;">self</span>.name
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">be_happy</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s is wagging tail"</span> % <span style="color: #ac0810;">self</span>.name
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">be_angry</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s says 'GRRRRRRRR!'"</span> % <span style="color: #ac0810;">self</span>.name
+
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Cat</span>(Animal):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">say_hello</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s says 'Meow!'"</span> % <span style="color: #ac0810;">self</span>.name
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">be_happy</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s is purring"</span> % <span style="color: #ac0810;">self</span>.name
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">be_angry</span>(<span style="color: #ac0810;">self</span>):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s says 'HISSSSSSSSS!'"</span> % <span style="color: #ac0810;">self</span>.name
+</pre>
+</div>
+
+<p>
+While this isn't too drastic in Python code, in static languages
+</p>
+
+<ul class="org-ul">
+<li>At the very least, you force clients to recompile their code.</li>
+
+<li>It is impossible for clients to extend the hierarchy in this way, as
+it requires a change to the source code of the hierarchy's
+interface, which is controlled by the library author.</li>
+</ul>
+
+<p>
+The moral of the story is: Typical class hierarchies in Java and C++
+are open for extension through the addition of new types, but are
+<b>not</b> open for extension by addition of new operations.
+</p>
+
+<p>
+Imagine that you have a situation in which you don't much care about
+adding new types to your library, but you do want to make it possible
+to add new operations. In our context, imagine that you know that you
+will only ever want cats and dogs, but you might want to teach them
+new tricks.
+</p>
+
+<p>
+To do this, use the same structure we used to implement double
+dispatch.
+</p>
+
+<p>
+First you create the fixed set of types (<code>Cat</code>, <code>Dog</code>). Within those
+types, you install a method which receives operation objects as
+arguments. All this method should do is forward the request to the
+operation object, but do so in a way which identifies the type (<code>Cat</code>,
+<code>Dog</code>) which is supposed to be performing the operation.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ac0810;">from</span> abc <span style="color: #ac0810;">import</span> abstractmethod, ABCMeta
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Animal</span>:
+
+    <span style="color: #1ddf11;">__metaclass__</span> = ABCMeta
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">__init__</span>(<span style="color: #ac0810;">self</span>, name):
+        <span style="color: #ac0810;">self</span>.name = name
+
+    <span style="color: #917b17;">@abstractmethod</span>
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">do</span>(<span style="color: #ac0810;">self</span>, do_something):
+        <span style="color: #ac0810;">pass</span>
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Dog</span>(Animal):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">do</span>(<span style="color: #ac0810;">self</span>, do_something):
+        <span style="color: #ac0810;">return</span> do_something.like_a_dog(<span style="color: #ac0810;">self</span>)
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">Cat</span>(Animal):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">do</span>(this_cat, do_something):
+        <span style="color: #ac0810;">return</span> do_something.like_a_cat(this_cat)
+</pre>
+</div>
+
+<p>
+Then you create the operation types (<code>SayHello</code>, <code>BeHappy</code>). Within
+each of those operations you create one method for each actual type
+(<code>Dog</code>, <code>Cat</code>) which implements that type's behaviour for the
+operation.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ac0810;">class</span> <span style="color: #917b17;">SayHello</span>:
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">like_a_dog</span>(<span style="color: #ac0810;">self</span>, the_dog):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s says 'Woof!'"</span> % the_dog.name
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">like_a_cat</span>(<span style="color: #ac0810;">self</span>, the_cat):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s says 'Meow!'"</span> % the_cat.name
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">BeHappy</span>:
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">like_a_dog</span>(<span style="color: #ac0810;">self</span>, the_dog):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s is wagging tail"</span> % the_dog.name
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">like_a_cat</span>(<span style="color: #ac0810;">self</span>, the_cat):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s is purring"</span> % the_cat.name
+</pre>
+</div>
+
+<p>
+In Python we can get away without it, but in static languages, <code>Cat</code>
+and <code>Dog</code> would have to share an <code>Animal</code> interface, while <code>SayHello</code>
+and <code>BeHappy</code> would have to share some <code>AnimalBehaviour</code> interface.
+</p>
+
+<p>
+To invoke these operations, you'll need not only instances of the
+Animal classes, but also instances of the operation classes.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #1ddf11;">rover</span> = Dog(<span style="color: #4463ca;">'Rover'</span>)
+<span style="color: #1ddf11;">minou</span> = Cat(<span style="color: #4463ca;">'Minou'</span>)
+
+<span style="color: #1ddf11;">say_hello</span> = SayHello()
+<span style="color: #1ddf11;">be_happy</span>  = BeHappy()
+</pre>
+</div>
+
+<p>
+Then you invoke the operations in a slightly odd way
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="org3c3f69a"><span style="color: #ac0810;">print</span> rover.do(say_hello)
+<span style="color: #ac0810;">print</span> minou.do(say_hello)
+<span style="color: #ac0810;">print</span> rover.do(be_happy)
+<span style="color: #ac0810;">print</span> minou.do(be_happy)
+</pre>
+</div>
+
+<p>
+but it works.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-text">Rover says 'Woof!'
+Minou says 'Meow!'
+Rover says 'GRRRRRRRRRRR!'
+Minou says 'HISSSSSSSSSS!'
+</pre>
+</div>
+
+<p>
+What do we gain in return for organizing our code in this convoluted
+way? We have made the code open to extension by the addition of new
+<i>operations</i> (as opposed to types).
+</p>
+
+<p>
+Let's teach our pets to be angry
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ac0810;">class</span> <span style="color: #917b17;">BeAngry</span>:
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">like_a_dog</span>(<span style="color: #ac0810;">self</span>, the_dog):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s says 'GRRRRRRRRRRR!'"</span> % the_dog.name
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">like_a_cat</span>(<span style="color: #ac0810;">self</span>, the_cat):
+        <span style="color: #ac0810;">return</span> <span style="color: #4463ca;">"%s says 'HISSSSSSSSSS!'"</span> % the_cat.name
+
+<span style="color: #1ddf11;">be_angry</span> = BeAngry()
+</pre>
+</div>
+
+<p>
+Note that this code could have been written by a third party (not just
+the owner of <code>Dog</code> and <code>Cat</code>). This would be impossible if the code
+were organized in the usual way.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python">rover.do(be_angry)
+minou.do(be_angry)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-text">"Rover says 'GRRRRRRRRRRR!'"
+"Minou says 'HISSSSSSSSSS!'"
+</pre>
+</div>
+
+<p>
+In summary, the Visitor Patterns allows us to make an extensible set
+of operations applicable to a fixed set of types. This is in contrast
+with the usual state of affairs, where a fixed set of operations is
+applicable to an extensible set of types.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org738041c" class="outline-4">
+<h4 id="org738041c"><span class="section-number-4">3.18.6</span> The official names</h4>
+<div class="outline-text-4" id="text-3-18-6">
+<p>
+The official names used in the pattern are, frankly, awful. They do
+nothing to help understanding the purpose or the implementation of the
+pattern, they merely confuse. Here is the Visitor pattern again, this
+time using the official names of the components.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ac0810;">class</span> <span style="color: #917b17;">ElementA</span>:
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">accept</span>(<span style="color: #ac0810;">self</span>, visitor):
+        visitor.visitElementA(<span style="color: #ac0810;">self</span>)
+
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">ElementB</span>:
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">accept</span>(<span style="color: #ac0810;">self</span>, visitor):
+        visitor.visitElementB(<span style="color: #ac0810;">self</span>)
+
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">VisitorA</span>(<span style="color: #b0c4de;">object</span>):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">visitElementA</span>(<span style="color: #ac0810;">self</span>, element):
+        <span style="color: #ac0810;">print</span> <span style="color: #4463ca;">"ElementA and VisitorA"</span>
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">visitElementB</span>(<span style="color: #ac0810;">self</span>, element):
+        <span style="color: #ac0810;">print</span> <span style="color: #4463ca;">"ElementB and VisitorA"</span>
+
+
+<span style="color: #ac0810;">class</span> <span style="color: #917b17;">VisitorB</span>(VisitorA):
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">visitElementA</span>(<span style="color: #ac0810;">self</span>, element):
+        <span style="color: #ac0810;">print</span> <span style="color: #4463ca;">"ElementA and VisitorB"</span>
+
+    <span style="color: #ac0810;">def</span> <span style="color: #127325;">visitElementB</span>(<span style="color: #ac0810;">self</span>, element):
+        <span style="color: #ac0810;">print</span> <span style="color: #4463ca;">"ElementB and VisitorB"</span>
+
+
+ElementA().accept(VisitorB())
+ElementB().accept(VisitorB())
+ElementA().accept(VisitorA())
+ElementB().accept(VisitorA())
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge8f75ef" class="outline-4">
+<h4 id="orge8f75ef"><span class="section-number-4">3.18.7</span> Chopping up the type-operation table</h4>
+<div class="outline-text-4" id="text-3-18-7">
+<p>
+Standard message-passing OOP groups together functionality by
+type, spreading the implementations of each operation out among
+the types.
+</p>
+
+<p>
+The Visitor pattern reverses this: the code is grouped together by
+operation, spreading out the implementation of the types out among
+the operations.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org700f22b" class="outline-4">
+<h4 id="org700f22b"><span class="section-number-4">3.18.8</span> Summary</h4>
+<div class="outline-text-4" id="text-3-18-8">
+<p>
+The Visitor pattern has three different facets:
+</p>
+
+<ol class="org-ol">
+<li>It's a way of implementing multiple dynamic dispatch in
+languages which only support single dynamic dispatch.</li>
+
+<li>It exchanges extensibility of the set of types for
+extensibility of the set of operations.</li>
+
+<li>It changes the organization of code from group-by-type to
+group-by-operation.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orge7f0162" class="outline-4">
+<h4 id="orge7f0162"><span class="section-number-4">3.18.9</span> An example applying Visitor in concert with Composite</h4>
+<div class="outline-text-4" id="text-3-18-9">
+<p>
+Try <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/visitor_and_composite_exercise.py">this exercise</a>.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgca2ee04" class="outline-3">
+<h3 id="orgca2ee04"><span class="section-number-3">3.19</span> Mediator</h3>
+<div class="outline-text-3" id="text-3-19">
+<div class="buzzphrase">
+<p>
+Define an object that encapsulates how a set of objects
+interact. Mediator promotes loose coupling by keeping objects from
+referring to each other explicitly, and it lets you vary their
+interaction independenly.
+</p>
+
+</div>
+
+<p>
+Try <a href="http://jacek.web.cern.ch/jacek/courses/dp/examples/mediator_exercise.py">this exercise</a>.
+</p>
+
+<p>
+Often makes use of Observer.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7e91add" class="outline-3">
+<h3 id="org7e91add"><span class="section-number-3">3.20</span> Interpreter</h3>
+<div class="outline-text-3" id="text-3-20">
+<div class="buzzphrase">
+<p>
+Given a language, define a representation for its grammar along with
+an interpreter that uses the representation to interpret sentences in
+the language.
+</p>
+
+</div>
+
+<p>
+Requires a whole course unto itself.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+</body></html>

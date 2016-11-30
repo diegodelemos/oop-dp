@@ -104,15 +104,28 @@ link: http://jacek.web.cern.ch/jacek/courses/dp/course.html
      ~ Originator:
        - create a memento
          containing a snapshot of its
-         internal state
+         internal state.
        - uses a memento to restore its
-         internal state
+         internal state.
      ~ Caretaker:
        - is responsible for the
-         memento's safekeeping
+         memento's safekeeping.
        - never operates on or examines
-         the contents of a memento
+         the contents of a memento.
 
+(15) Builder				---- Creational
+     ~ Complex object construction
+       separated from its representation
+       so the same construnction process
+       can create different
+       representations.
+     ~ Comparing it to Abstract Factory
+       Builder leaves all the
+       responsibility for putting all
+       together whereas in Abstract
+       Factory once we get the
+       constructed objects we have
+       to put them together.
 
 
                _____________________________________

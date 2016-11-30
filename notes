@@ -100,6 +100,20 @@ link: http://jacek.web.cern.ch/jacek/courses/dp/course.html
      ~ An adpter is often used on one
        side of a Bridge.
 
+(14) Memento			        ---- Behavioural
+     ~ Originator:
+       - create a memento
+         containing a snapshot of its
+         internal state
+       - uses a memento to restore its
+         internal state
+     ~ Caretaker:
+       - is responsible for the
+         memento's safekeeping
+       - never operates on or examines
+         the contents of a memento
+
+
 
                _____________________________________
               | Creational        | Behavioural	    |

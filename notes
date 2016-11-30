@@ -72,6 +72,24 @@ link: http://jacek.web.cern.ch/jacek/courses/dp/course.html
        How	VS What
      ~ Treat functions as data.
 
+(12) Iterator			         ---- Behavioural
+     ~ External iterator. Object wraps
+       original collection and provides
+       fine grain control over the
+       iteration process
+     ~ Internal iterator. You just go
+       over the iterator no care about
+       reaching the end or being empty.
+       For loops in python use internal
+       iterators
+     ~ No matter how the iteration
+       process or how complex is the
+       internal data structure, the
+       interface for going through it
+       it is always the same.
+
+
+
                _____________________________________
               | Creational        | Behavioural	    |
  ---------------------------------------------------|

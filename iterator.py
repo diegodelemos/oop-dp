@@ -49,40 +49,45 @@ l = Node(1, Node(2, Node(3, Node (4, None))))
 # Provide internal and external iterators for the composite.
 class Tree:
 
-    def __init__(self, value):
-        self._left = Leaf()
+    def __init__(self, value=None):
+        self._left = None
         self._value = value
-        self._right = Leaf()
+        self._right = None
 
     def insert(self, value):
-        if value < self._value:
+        if self._value is None:
+            self._value = value
+        elif value < self._value:
+            self._left = Tree()
             self._left.insert(value)
         else:
+            self._right = Tree()
             self._right.insert(value)
 
     def __iter__(self):
-        return TreeIterator(self)
+        if self._left is not None:
+            for item in self._left:
+                yield item
 
+        if self._value is not None:
+            yield self._value
 
+        if self._right is not None:
+            for item in self._right:
+                yield item
 
-class Leaf:
-
-    "Your code goes here"
-
-class TreeIterator:
-
-    def __init__(self, tree):
-        self._tree = tree
-
-    def next(self):
-        pass
-
-"Your Leaf iterator class implementation goes here"
+    def each(self, op):
+        if self._left is not None:
+            self._left.each(op)
+        op(self._value)
+        if self._right is not None:
+            self._right.each(op)
 
 # The order in which we insert the data into the tree shouldn't
 # matter, the tree should take care of storing them in increasing
 # order, and iterating over the tree should give the data in sorted
 # order.
+
 t = Tree(5)
 t.insert(2)
 t.insert(4)
@@ -95,7 +100,7 @@ t.insert(7)
 
 # We will repeat our tests for each of the two iterables we have
 # created above.
-iterables = l,t
+iterables = l, t
 
 # The output should always be
 # 1 2 3 4         1 2 3 4 5 6 7 8 9        

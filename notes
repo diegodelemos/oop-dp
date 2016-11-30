@@ -127,6 +127,34 @@ link: http://jacek.web.cern.ch/jacek/courses/dp/course.html
        constructed objects we have
        to put them together.
 
+(16) Visitor			        ---- Behavioural
+     ~ In OOP changes on types are
+       easy to maintain, but changes
+       on the operations pain in the
+       neck.
+
+	   types
+        * | * | * | *
+        * | * | * | * 
+        * | * | * | * Operations
+        * | * | * | *
+        * | * | * | *
+
+     ~ In procedural programming
+       changes on operations were
+       easy, changes on types were
+       a pain in the neck.
+
+	   types
+        * * * * * * *
+        - - - - - - -
+        * * * * * * * Operations
+        - - - - - - -
+        * * * * * * *
+
+     ~ Useful for creating
+       multi dispatch in single
+       dispatch languages.
 
                _____________________________________
               | Creational        | Behavioural	    |
